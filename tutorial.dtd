@@ -1,0 +1,26 @@
+<!ELEMENT tutorial (version,author,email?,date?,title,shortdesc,desc,step+,category*)>
+<!ELEMENT version	(#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT shortdesc (#PCDATA)>
+<!ELEMENT desc (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT step (number,text*,img*,link*)>
+<!ELEMENT number (#PCDATA)>
+<!ELEMENT text (#PCDATA)>
+<!ELEMENT img (#PCDATA)>
+<!ATTLIST img
+		src			CDATA		#REQUIRED
+		alt			CDATA 	#IMPLIED
+		height	CDATA		#IMPLIED
+		width		CDATA		#IMPLIED
+>
+<!ELEMENT link (#PCDATA)>
+<!ATTLIST link
+		href		CDATA		#REQUIRED
+		target	CDATA		#IMPLIED
+		text		CDATA		#IMPLIED
+>
+		
