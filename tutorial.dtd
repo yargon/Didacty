@@ -1,4 +1,4 @@
-<!ELEMENT tutorial (version,author,email?,date?,title,shortdesc,desc,step+,category*)>
+<!ELEMENT tutorial (version,author,email?,date?,title,shortdesc,desc*,step+,category*)>
 <!ELEMENT version	(#PCDATA)>
 <!ELEMENT author (#PCDATA)>
 <!ELEMENT email (#PCDATA)>
@@ -7,9 +7,9 @@
 <!ELEMENT shortdesc (#PCDATA)>
 <!ELEMENT desc (#PCDATA)>
 <!ELEMENT category (#PCDATA)>
-<!ELEMENT step (number,text*,img*,link*)>
+<!ELEMENT step (number,text+,img*)>
 <!ELEMENT number (#PCDATA)>
-<!ELEMENT text (#PCDATA)>
+<!ELEMENT text (#PCDATA,link*)>
 <!ELEMENT img (#PCDATA)>
 <!ATTLIST img
 		src			CDATA		#REQUIRED
@@ -21,6 +21,5 @@
 <!ATTLIST link
 		href		CDATA		#REQUIRED
 		target	CDATA		#IMPLIED
-		text		CDATA		#IMPLIED
 >
 		
