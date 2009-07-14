@@ -139,9 +139,10 @@ This will show before the steps in your tutorial(optional)
 		{
 			die('Could not connect: ' . mysql_error());
 		}
-		mysql_select_db(didacty,$con);
-		mysql_query("INSERT INTO tutorial (version, author, email, date, title, shortdesc, desc)
-		VALUES (1, '$username', '',$date_time, '$_POST[ttitle]', '$_POST[tsd]', '$_POST[td]')");
+		mysql_select_db("didacty",$con);
+		$query = "INSERT INTO `tutorial` (`version`, `author`, `email`, `date`, `title`, `shortdesc`, `desc`)
+		VALUES ('1', '$_SESSION[username]', '','$date_time', '$_POST[ttitle]', '$_POST[tsd]', '$_POST[td]')";
+		mysql_query($query);
 		mysql_close($con);
 	}
 }
@@ -149,6 +150,34 @@ This will show before the steps in your tutorial(optional)
 if($_SESSION['step']!=0)
 {
 ?>
+<label for="s<?php print $_SESSION['step'] ?>">Step <?php print $_SESSION['step'] ?>:</label><br />
+<textarea name="s<?php print $_SESSION['step'] ?>" rows="3" cols="70"><?php
+// rewrites the tutorial introduction
+$sid='s'.$_SESSION['step'];
+if(isset($_POST[$sid]))
+{
+  print $_POST[$sid];
+}
+?></textarea><br />
+<?php
+//writes error message if needed
+if($_SESSION['validate']==1)
+{
+  if($_POST[$sid]=="")
+  {
+    print("<div style='color: #ff0000;' >You're missing the Step</div>");
+  }
+  else
+  {
+    print("<br />");
+  }
+}
+else
+{
+  print ("<br />");
+}
+?>
+<br />
 <label for="image">Insert Image:</label>
 <input type="file" name="image" id="I<?php print($_SESSION['step']); ?>" />(optional)
 <br /><br />
