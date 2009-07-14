@@ -106,7 +106,7 @@ else
 }
 ?>
 <br />
-Tutorial Description: (this will show up when someone searches for you tutorial and is required)<br>
+Tutorial Description: (this will show up when someone searches for your tutorial and is required)<br />
 <textarea name="TD" rows="3" cols="70">
 <?php
 // rewrites what is in the tutorial description textarea.
@@ -133,11 +133,22 @@ else
   print ("<br />");
 }
 ?>
-<br>
+<br />
+Tutorial Introduction(not required)<br />
+<textarea name="TI" rows="3" cols="70">
+<?php
+// rewrites what is in the tutorial introduction textarea.
+if(isset($_POST['TI']))
+{
+  print $_POST['TI'];
+}
+?>
+</textarea>
+<br />
 <?php
 print $_SESSION['steps']; 
 ?>
-<h2>Step 1:</h2>
+<h2>Step 1</h2>
 <br />
 <textarea name="TA1" rows="5" cols="70">
 <?php
@@ -211,14 +222,15 @@ if ($_SESSION['steps']!=1)
 <?php
 }
 ?>
-<br>
+<br />
 <input type="submit" value="Submit Tutorial" name="button" onClick="document.tutorial.action='SubmitTutorial.php'">
 <a name="S">
 <?php
 }
 else
 {
-//this is where the code to deal with the submition of the form goes.
+//code that deals with the submition of the data.
+
 }
 ?>
 </body>
