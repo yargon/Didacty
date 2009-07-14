@@ -1,5 +1,11 @@
 <?php
 session_start();
+//http://eli-web3.cas.usf.edu/dev/createtutorial.php
+//create username variable
+if(!isset($_SESSION['username']))
+{
+	$_SESSION['username']='username';
+}
 //create step variable
 if(!isset($_SESSION['step']))
 {
@@ -32,17 +38,19 @@ if(isset($_POST['next']) && $_POST['next'])
 //checks if user is at the start of the tutorial submition
 if($_SESSION['step']==0)
 {
-	//checks if you should move on to the next step
-	if($_SESSION['revalidate']==1)
-	{
-		$_SESSION['validate']=2;
-	}
 	//checks if form is validated, and sets revalidate = 1 if it is error free
 	if($_SESSION['validate']==1)
 	{	
 		$_SESSION['revalidate']=1;
 		if($_POST['ttitle']=="")
 			$_SESSION['revalidate']=0;
+		if($_POST['tsd']=="")
+			$_SESSION['revalidate']=0;
+	}
+	//checks if you should move on to the next step
+	if($_SESSION['revalidate']==1)
+	{
+		$_SESSION['validate']=2;
 	}
 	if($_SESSION['validate']!=2)
 	{
@@ -75,23 +83,75 @@ else
 }
 ?>
 <br />
+<label for="tsd">Tutorial Description:</label><br />
+<textarea name="tsd" rows="3" cols="70">
+<?php
+// rewrites the tutorial description
+if(isset($_POST['tsd']))
+{
+  print $_POST['tsd'];
+}
+?>
+</textarea><br />
+This shows when someone searches for your tutorial(required)
+<?php
+//writes error message if needed
+if($_SESSION['validate']==1)
+{
+  if($_POST['tsd']=="")
+  {
+    print("<div style='color: #ff0000;' >You're missing the title description</div>");
+  }
+  else
+  {
+    print("<br />");
+  }
+}
+else
+{
+  print ("<br />");
+}
+?>
+<br />
+<label for="td">Tutorial Introduction:</label><br />
+<textarea name="td" rows="3" cols="70">
+<?php
+// rewrites the tutorial introduction
+if(isset($_POST['td']))
+{
+  print $_POST['td'];
+}
+?>
+</textarea><br />
+This will show before the steps in your tutorial(optional)
+<br /><br />
 <?php
 	}
-	//if validate = 2, resets values for next part of the form and stores the values in a database.
-	else
+	//if validate = 2, resets values for next part of the form and stores the necessary values in a database.
+	if($_SESSION['validate']==2)
 	{
 		$_SESSION['validate']=0;
 		$_SESSION['revalidate']=0;
 		$_SESSION['step']++;
+		$date_time=date("Y-m-d h:i:s");
+		$con=mysql_connect(eli-web3,didacty,didacty);
+		if (!$con)
+		{
+			die('Could not connect: ' . mysql_error());
+		}
+		mysql_select_db(didacty,$con);
+		mysql_query("INSERT INTO tutorial (version, author, email, date, title, shortdesc, desc)
+		VALUES (1, '$username', '',$date_time, '$_POST[ttitle]', '$_POST[tsd]', '$_POST[td]')");
+		mysql_close($con);
 	}
 }
-//if steps != 0, code to create steps for the tutorial
-else
+//if step != 0, code to create steps for the tutorial
+if($_SESSION['step']!=0)
 {
 ?>
 <label for="image">Insert Image:</label>
-<input type="file" name="image" id="I<?php print(SESSION['step']); ?>" />(optional)
-<br />
+<input type="file" name="image" id="I<?php print($_SESSION['step']); ?>" />(optional)
+<br /><br />
 <?php
 }
 ?>
