@@ -1,0 +1,48 @@
+{
+	"engine_version" : "0.1",
+	"title": "Sample Tutorial",
+	"author": {
+		"name": "Yargon",
+		"url": "http://www.yargon.info"
+	},
+	"contributors": "none",
+	"tags": ["simple","demo"],
+	"creationDate": "2015-09-13",
+	"lastUpdated": "2015-09-13",
+	"options": {
+		"step_numbering" : "numeric"
+	},
+	"language" : "en_US",
+	"summary" : "This is a simple sample of tutorial for the tutorial engine.",
+	"ressources" : {
+		"logo" : {
+			"path" : "./img/logo.jpg",
+			"type" : "image/jpeg",
+			"description" : "Yargon Logo",
+			"md5" : "3eddf23920cb96043a5a6d485eda664b",
+			"display" : "inline"
+		},
+		"screenshot1" : {
+			"path" : "./img/screenshot_1.png",
+			"type" : "image/png",
+			"description" : "Screenshot of the first step.",
+			"display" : "download"
+		},
+		"sample" : {
+			"path" : "http://imgur.com/Chgdt",
+			"type" : "image/jpeg",
+			"description" : "remote ressource"
+		},
+		"vid_sample" : {
+			"path" : "./sample.mpg",
+			"type" : "video/mpeg",
+			"descritption" : "video, may need to be converted",
+			"md5" : "92c71920a7554ea04afd48d2bf9ff49a"
+		}
+	},
+	"steps" : {
+		"1" : "This is the screen you should find when you click on the button: [screenshot1].",
+		"2" : "Next you should find something else.",
+		"3" : "Finally you should do something cool"
+	}
+}
